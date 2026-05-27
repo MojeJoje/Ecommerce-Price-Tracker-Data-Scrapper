@@ -51,7 +51,7 @@ class EcommerceScraper:
 
     def export_products(self, format: str = "excel", filename: str = None) -> str:
         """
-        Export products to file.
+        Export products to file, filtering out products with mostly missing fields.
 
         Args:
             format: Export format ('excel' or 'csv')
@@ -60,15 +60,22 @@ class EcommerceScraper:
         Returns:
             Path to output file
         """
+        # Filter out products with missing essential fields (name or price or url is N/A or empty)
+        filtered_products = [
+            p for p in self.products
+            if p and p.get("name") not in [None, "", "N/A"]
+            and p.get("price") not in [None, "", "N/A"]
+            and p.get("url") not in [None, "", "N/A"]
+        ]
         if format.lower() == "excel":
             default_filename = filename or "products.xlsx"
             output_path = self.data_processor.save_to_excel(
-                self.products, default_filename
+                filtered_products, default_filename
             )
         elif format.lower() == "csv":
             default_filename = filename or "products.csv"
             output_path = self.data_processor.save_to_csv(
-                self.products, default_filename
+                filtered_products, default_filename
             )
         else:
             logger.error(f"Unsupported format: {format}")

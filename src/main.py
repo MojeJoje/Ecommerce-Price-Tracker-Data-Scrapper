@@ -33,7 +33,7 @@ def main():
 
         # Scrape Amazon
         logger.info("Scraping Amazon...")
-        search_queries = ["laptop", "smartphone"]
+        search_queries = ["Laptop Table"]
         products = scraper.scrape_amazon(search_queries, max_pages=1)
 
         if products:

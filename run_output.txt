@@ -1,0 +1,31 @@
+STDOUT:
+
+
+STDERR:
+2026-05-27 03:05:36,564 - __main__ - INFO - Starting E-commerce Price Tracker
+2026-05-27 03:05:36,566 - __main__ - INFO - Scraping Amazon...
+2026-05-27 03:05:36,566 - scraper - INFO - Starting Amazon scrape for: laptop
+2026-05-27 03:05:36,567 - amazon_scraper - INFO - Scraping page 1 for query: laptop
+2026-05-27 03:05:38,197 - amazon_scraper - WARNING - Attempt 1 failed: 503 Server Error: Service Unavailable for url: https://www.amazon.com/s?k=laptop&page=1
+2026-05-27 03:05:43,929 - __main__ - ERROR - Error during scraping: Couldn't find a tree builder with the features you requested: lxml. Do you need to install a parser library?
+Traceback (most recent call last):
+  File "C:\Users\MojeJoje\Documents\Projects\E-commerce price tracker Data Scrapping\src\main.py", line 37, in main
+    products = scraper.scrape_amazon(search_queries, max_pages=1)
+  File "C:\Users\MojeJoje\Documents\Projects\E-commerce price tracker Data Scrapping\src\scraper.py", line 45, in scrape_amazon
+    query_products = self.amazon_scraper.search_products(query, max_pages)
+  File "C:\Users\MojeJoje\Documents\Projects\E-commerce price tracker Data Scrapping\src\amazon_scraper.py", line 67, in search_products
+    page_products = self._scrape_search_page(search_query, page)
+  File "C:\Users\MojeJoje\Documents\Projects\E-commerce price tracker Data Scrapping\src\amazon_scraper.py", line 98, in _scrape_search_page
+    return self._parse_search_results(response.content)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MojeJoje\Documents\Projects\E-commerce price tracker Data Scrapping\src\amazon_scraper.py", line 112, in _parse_search_results
+    soup = BeautifulSoup(content, "lxml")
+  File "C:\Users\MojeJoje\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\bs4\__init__.py", line 250, in __init__
+    raise FeatureNotFound(
+    ...<2 lines>...
+        % ",".join(features))
+bs4.FeatureNotFound: Couldn't find a tree builder with the features you requested: lxml. Do you need to install a parser library?
+2026-05-27 03:05:43,945 - __main__ - INFO - E-commerce Price Tracker completed
+
+
+Return code: 1
